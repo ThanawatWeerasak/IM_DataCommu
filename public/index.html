@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="app">
+
+      <!--Walk-->
+      <div class="screen join-screen active">
+          <div class = "bord">
+            <div class="form">
+                <h2>Join Chatroom</h2>
+                <div class="control block-cube block-input">
+                    <input placeholder="Username" type="text" id = "username">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                </div>
+                
+                <button class="btn block-cube block-cube-hover" type="button" id ="join-user">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">
+                        Join
+                    </div>
+                </button>
+            </div>
+          </div>
+
+      </div>
+      <!--Walk-->
+      <!--Saru-->
+
+      <div class="screen chatScreen">
+        <div class="header">
+          <div>Message</div>
+          <button id="exit-chat">×</button>
+        </div>
+
+        <div class="messages">
+
+        </div>
+
+        <!--inputอยู่นี้-->
+        <div class="typebox">
+          <input type="text" id="message-input" placeholder="Type your message...">
+          <button id="send-message">➤</button>
+        </div>
+  
+      </div>
+      <!--Saru-->
+    </div>
+
+    <!--เวลาพิมพ์ inputจะสีเข้มขึ้น and กด enterเเล้วส่งเลย-->
+    <script>
+      const typebox = document.querySelector('.typebox');
+      const messageInput = document.getElementById('message-input');
+      const bouttonInput =document.getElementById('send-message');
+      const sendButton = document.getElementById('send-message');
+
+      messageInput.addEventListener('focus', () => {
+        typebox.classList.add('is-typing');
+      });
+
+      messageInput.addEventListener('blur', () => {
+        typebox.classList.remove('is-typing');
+      });
+
+      messageInput.addEventListener('keyup', function(event) {
+
+        if (event.key === 'Enter') {
+            event.preventDefault(); 
+            sendButton.click(); 
+        }
+      });
+    </script>
+
+  <script type="text/javascript" src="socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="code.js"></script>
+  </body>
+
+</html>

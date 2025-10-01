@@ -63,6 +63,15 @@
         <div class="typebox">
           <input type="text" id="message-input" placeholder="Type your message...">
           <button id="send-message">➤</button>
+           <button id="image-upload" class="">
+            <img src="image.png" alt="" class="w-[30px] h-[30px] bg-white" />
+          </button>
+          <input
+            type="file"
+            id="image-input"
+            accept="image/*"
+            style="display: none"
+          />
         </div>
   
       </div>
@@ -96,5 +105,6 @@
   <script type="text/javascript" src="socket.io/socket.io.js"></script>
   <script type="text/javascript" src="code.js"></script>
   </body>
+
 
 </html>

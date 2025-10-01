@@ -116,7 +116,7 @@
       el.innerHTML = `
       <div>
         <div class="name">You</div>
-        <div class="">
+        <div class="bg-white p-4 rounded-[1rem] max-w-[500px] max-h-[800px]">
           <img src="data:image/png;base64,${img.base64}" class="chat-image">
         </div>
       </div>
@@ -126,7 +126,7 @@
       el.innerHTML = `
       <div>
         <div class="name">${img.username}</div>
-        <div class="">
+        <div class="bg-white p-4 rounded-[1rem] max-w-[500px] max-h-[800px]">
           <img src="data:image/png;base64,${img.base64}" class="chat-image">
         </div>
       </div>
@@ -147,3 +147,4 @@
   /////////////////////////////////////////////
 
 })();
+

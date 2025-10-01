@@ -79,4 +79,71 @@
 
     messageContainer.scrollTop = messageContainer.scrollHeight - messageContainer.clientHeight;
   }
+
+  // img input /////////////////////////////////////
+  app
+    .querySelector(".chatScreen #image-upload")
+    .addEventListener("click", () => {
+      app.querySelector(".chatScreen #image-input").click();
+    });
+
+  app
+    .querySelector(".chatScreen #image-input")
+    .addEventListener("change", (e) => {
+      let img = e.target.files[0];
+      if (!img) return;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const base64 = this.result.replace(/.*base64,/, "");
+        socket.emit("image", { username: uname, base64 });
+        console.log("Image sent to server");
+
+        renderImg("myimg", {
+          username: uname,
+          base64: base64,
+        });
+      };
+      reader.readAsDataURL(img);
+    });
+
+  function renderImg(type, img) {
+    let messageContainer = app.querySelector(".chatScreen .messages");
+    let el = document.createElement("div");
+
+    if (type === "myimg") {
+      el.setAttribute("class", "message my-message");
+      el.innerHTML = `
+      <div>
+        <div class="name">You</div>
+        <div class="">
+          <img src="data:image/png;base64,${img.base64}" class="chat-image">
+        </div>
+      </div>
+    `;
+    } else if (type === "otherimg") {
+      el.setAttribute("class", "message other-message");
+      el.innerHTML = `
+      <div>
+        <div class="name">${img.username}</div>
+        <div class="">
+          <img src="data:image/png;base64,${img.base64}" class="chat-image">
+        </div>
+      </div>
+    `;
+    }
+
+    messageContainer.appendChild(el);
+    messageContainer.scrollTop =
+      messageContainer.scrollHeight - messageContainer.clientHeight;
+  }
+  socket.on("image", (data) => {
+    renderImg("otherimg", {
+      username: data.username,
+      base64: data.base64,
+    });
+  });
+
+  /////////////////////////////////////////////
+
 })();
